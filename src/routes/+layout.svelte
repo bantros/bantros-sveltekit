@@ -1,53 +1,32 @@
 <script>
-	import Header from './Header.svelte';
-	import './styles.css';
+	import Projects from './Projects.svelte';
+	import '../app.css';
+	// import './styles.css';
 </script>
 
 <div class="app">
-	<Header />
+	<header class="p-8 md:p-16">
+		<h1 class="text-base md:text-xl font-bold text-white mb-2">Jonathon Halliwell</h1>
+		<p class="max-w-3xl text-xl md:text-2xl text-white/60 mb-0">
+			Creative front end developer from Manchester, currently employed at
+			<a
+				class="text-white/30"
+				href="https://www.mosquitodigital.co.uk/"
+				target="_blank"
+				rel="noopener noreferrer">Mosquito Digital</a
+			>. Previously over at
+			<a
+				class="text-white/30"
+				href="https://weareraw.co.uk/"
+				target="_blank"
+				rel="noopener noreferrer">Raw Design Studio</a
+			>.
+		</p>
+	</header>
 
 	<main>
-		<slot />
+		<Projects />
 	</main>
-
-	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-	</footer>
 </div>
 
-<style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
-	}
-</style>
+<style></style>
