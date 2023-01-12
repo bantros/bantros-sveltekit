@@ -1,7 +1,5 @@
 <script>
-	import Projects from './Projects.svelte';
 	import '../app.css';
-	// import './styles.css';
 </script>
 
 <div class="app">
@@ -25,7 +23,7 @@
 	</header>
 
 	<main>
-		<Projects />
+		<slot />
 	</main>
 </div>
 
