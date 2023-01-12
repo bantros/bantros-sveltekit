@@ -1,17 +1,14 @@
 <script lang="ts">
-	import Projects from './Projects.svelte';
-	import LatestTweet from './LatestTweet.svelte';
+	import Projects from '../components/Projects.svelte';
+	import Timeline from '../components/Timeline.svelte';
+	import Player from '../components/Player.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 </script>
 
-<svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
-</svelte:head>
-
 <Projects />
-<LatestTweet tweets={data.userTweets.data} />
+<Timeline timeline={data.timeline.data} />
+<Player playing={data.playing} />
 
 <style></style>
