@@ -1,3 +1,4 @@
+import { error } from '@sveltejs/kit';
 import {
 	SPOTIFY_CLIENT_ID,
 	SPOTIFY_CLIENT_SECRET,
@@ -33,7 +34,19 @@ export const load = (async ({ fetch }) => {
 				Authorization: `Bearer ${access_token}`
 			}
 		});
-		return res.json();
+		const json = await res.json();
+		if (res.status === 204 || res.status > 400) {
+			return {
+				error: json.error,
+				is_playing: false
+			};
+		}
+		return {
+			album: json.item.album.name,
+			artist: json.item.artists.map((artist: { name: string }) => artist.name).join(', '),
+			track: json.item.name,
+			is_playing: json.is_playing
+		};
 	};
 
 	const getTimeline = async () => {
@@ -47,11 +60,23 @@ export const load = (async ({ fetch }) => {
 				}
 			}
 		);
-		return res.json();
+		const json = await res.json();
+		if (res.status === 304 || res.status > 400) {
+			return {
+				error: {
+					status: json.status,
+					message: json.title
+				}
+			};
+		}
+		return {
+			id: json.data[0].id,
+			text: json.data[0].text
+		};
 	};
 
 	return {
-		playing: await getNowPlaying(),
+		player: await getNowPlaying(),
 		timeline: await getTimeline()
 	};
 }) satisfies PageLoad;

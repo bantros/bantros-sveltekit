@@ -8,7 +8,7 @@
 </script>
 
 <Projects />
-<Timeline timeline={data.timeline.data} />
-<Player playing={data.playing} />
+<Timeline timeline={data.timeline} />
+<Player player={data.player} />
 
 <style></style>
