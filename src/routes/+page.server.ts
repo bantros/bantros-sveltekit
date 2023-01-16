@@ -27,25 +27,50 @@ export const load = (async ({ fetch }) => {
 		return res.json();
 	};
 
-	const getNowPlaying = async () => {
+	const getCurrentlyPlayingTrack = async () => {
 		const { access_token } = await getAccessToken();
 		const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
 			headers: {
 				Authorization: `Bearer ${access_token}`
 			}
 		});
+		if (res.status === 204) {
+			const recentlyPlayedTracks = await getRecentlyPlayedTracks(access_token);
+			return recentlyPlayedTracks;
+		}
 		const json = await res.json();
-		if (res.status === 204 || res.status > 400) {
+		if (res.status > 400) {
 			return {
 				error: json.error,
-				is_playing: false
+				playing: false
 			};
 		}
 		return {
 			album: json.item.album.name,
 			artist: json.item.artists.map((artist: { name: string }) => artist.name).join(', '),
 			track: json.item.name,
-			is_playing: json.is_playing
+			playing: json.is_playing
+		};
+	};
+
+	const getRecentlyPlayedTracks = async (access_token: string) => {
+		const res = await fetch('https://api.spotify.com/v1/me/player/recently-played', {
+			headers: {
+				Authorization: `Bearer ${access_token}`
+			}
+		});
+		const json = await res.json();
+		if (res.status > 400) {
+			return {
+				error: json.error,
+				playing: false
+			};
+		}
+		return {
+			album: json.items[0].track.album.name,
+			artist: json.items[0].track.artists.map((artist: { name: string }) => artist.name).join(', '),
+			track: json.items[0].track.name,
+			playing: false
 		};
 	};
 
@@ -76,7 +101,7 @@ export const load = (async ({ fetch }) => {
 	};
 
 	return {
-		player: await getNowPlaying(),
+		player: await getCurrentlyPlayingTrack(),
 		timeline: await getTimeline()
 	};
 }) satisfies PageLoad;
