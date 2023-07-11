@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Projects from '../components/Projects.svelte';
-	import Timeline from '../components/Timeline.svelte';
 	import Player from '../components/Player.svelte';
 	import type { PageData } from './$types';
 
@@ -8,7 +7,6 @@
 </script>
 
 <Projects />
-<Timeline timeline={data.timeline} />
 <Player player={data.player} />
 
 <style></style>
