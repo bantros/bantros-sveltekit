@@ -1,17 +1,20 @@
-<script>
+<script lang="ts">
 	import '../app.css';
+	let { children } = $props();
 </script>
 
 <div class="app">
 	<header class="p-8 md:p-16">
-		<h1 class="text-base md:text-xl font-bold text-white mb-2">Jonathon Halliwell</h1>
-		<p class="max-w-3xl text-xl md:text-2xl text-white/60 mb-0">
+		<h1 class="mb-2 text-base font-bold text-white md:text-xl">
+			Jonathon Halliwell
+		</h1>
+		<p class="mb-0 max-w-3xl text-xl text-white/60 md:text-2xl">
 			Creative front end developer from Manchester, currently employed at
 			<a
 				class="text-white/30"
-				href="https://www.mosquitodigital.co.uk/"
+				href="https://www.ctidigital.com/"
 				target="_blank"
-				rel="noopener noreferrer">Mosquito Digital</a
+				rel="noopener noreferrer">CTI Digital</a
 			>. Previously over at
 			<a
 				class="text-white/30"
@@ -21,10 +24,7 @@
 			>.
 		</p>
 	</header>
-
 	<main>
-		<slot />
+		{@render children()}
 	</main>
 </div>
-
-<style></style>

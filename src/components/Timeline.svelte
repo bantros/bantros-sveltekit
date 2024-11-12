@@ -11,11 +11,10 @@
 	export let timeline: Tweet;
 </script>
 
-<div class="p-8  md:p-16">
+<div class="p-8 md:p-16">
 	<div class="max-w-3xl">
 		<h2 class="mb-2 text-base text-white/60 md:text-xl">Twitter</h2>
-
-		<p class="text-2xl md:text-4xl lg:text-5xl mb-0">
+		<p class="mb-0 text-2xl md:text-4xl lg:text-5xl">
 			{#if timeline.error}
 				{timeline.error.status}
 				<span class="text-white/30">{timeline.error.message}</span>

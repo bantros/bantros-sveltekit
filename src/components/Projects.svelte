@@ -1,58 +1,64 @@
 <script>
 	const projects = [
 		{
+			id: 'chester-zoo',
+			title: 'Chester Zoo',
+			url: 'https://chesterzoo.org/',
+			color: 'text-white'
+		},
+		{
 			id: 'redburn',
 			title: 'Redburn',
 			url: 'https://research.redburn.com/',
-			color: 'text-white'
+			color: 'text-white/95'
 		},
 		{
 			id: 'jodrell-bank',
 			title: 'Jodrell Bank',
 			url: 'https://www.jodrellbank.net/',
-			color: 'text-white'
+			color: 'text-white/90'
 		},
 		{
 			id: 'the-reader',
 			title: 'The Reader',
 			url: 'https://trails.thereader.org.uk/',
-			color: 'text-white/90'
+			color: 'text-white/85'
 		},
 		{
 			id: 'faded',
 			title: 'Faded',
 			url: 'https://fadedstore.com/',
-			color: 'text-white/90'
+			color: 'text-white/80'
 		},
 		{
 			id: 'horlicks',
 			title: 'Horlicks',
 			url: 'https://www.horlicks.co.uk/',
-			color: 'text-white/80'
+			color: 'text-white/75'
 		},
 		{
 			id: 'astonish',
 			title: 'Astonish',
 			url: 'https://astonish.co.uk/',
-			color: 'text-white/80'
+			color: 'text-white/70'
 		},
 		{
 			id: 'zoflora',
 			title: 'Zoflora',
 			url: 'https://www.zoflora.co.uk/',
-			color: 'text-white/70'
+			color: 'text-white/65'
 		},
 		{
 			id: 'dr-sarah-davies',
 			title: 'Dr Sarah Davies',
 			url: 'https://www.drsarahdavies.co.uk/',
-			color: 'text-white/70'
+			color: 'text-white/60'
 		},
 		{
 			id: 'raw',
 			title: 'Raw Design Studio',
 			url: 'https://weareraw.co.uk/',
-			color: 'text-white/60'
+			color: 'text-white/55'
 		}
 	];
 </script>

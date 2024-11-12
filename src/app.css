@@ -1,14 +1,18 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 @tailwind base;
 
 @layer base {
-  body {
-    @apply font-system;
-    @apply text-base;
-    @apply text-white;
-    @apply bg-black/95;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
-  }
+	body {
+		@apply font-system;
+		@apply text-base;
+		@apply text-white;
+		@apply bg-black/95;
+		-webkit-font-smoothing: antialiased;
+		-webkit-text-size-adjust: 100%;
+	}
 }
 
 @tailwind components;

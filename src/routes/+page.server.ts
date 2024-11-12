@@ -1,16 +1,16 @@
-import { error } from '@sveltejs/kit';
+import qs from 'qs';
 import {
 	SPOTIFY_CLIENT_ID,
 	SPOTIFY_CLIENT_SECRET,
 	SPOTIFY_REFRESH_TOKEN,
 	TWITTER_BEARER_TOKEN
 } from '$env/static/private';
-import type { PageLoad } from './$types';
-
-import qs from 'qs';
+import type { PageServerLoad } from './$types';
 
 export const load = (async ({ fetch }) => {
-	const basic = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
+	const basic = Buffer.from(
+		`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`
+	).toString('base64');
 
 	const getAccessToken = async () => {
 		const res = await fetch('https://accounts.spotify.com/api/token', {
@@ -29,11 +29,14 @@ export const load = (async ({ fetch }) => {
 
 	const getCurrentlyPlayingTrack = async () => {
 		const { access_token } = await getAccessToken();
-		const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
-			headers: {
-				Authorization: `Bearer ${access_token}`
+		const res = await fetch(
+			'https://api.spotify.com/v1/me/player/currently-playing',
+			{
+				headers: {
+					Authorization: `Bearer ${access_token}`
+				}
 			}
-		});
+		);
 		if (res.status === 204) {
 			const recentlyPlayedTracks = await getRecentlyPlayedTracks(access_token);
 			return recentlyPlayedTracks;
@@ -47,18 +50,23 @@ export const load = (async ({ fetch }) => {
 		}
 		return {
 			album: json.item.album.name,
-			artist: json.item.artists.map((artist: { name: string }) => artist.name).join(', '),
+			artist: json.item.artists
+				.map((artist: { name: string }) => artist.name)
+				.join(', '),
 			track: json.item.name,
 			playing: json.is_playing
 		};
 	};
 
 	const getRecentlyPlayedTracks = async (access_token: string) => {
-		const res = await fetch('https://api.spotify.com/v1/me/player/recently-played', {
-			headers: {
-				Authorization: `Bearer ${access_token}`
+		const res = await fetch(
+			'https://api.spotify.com/v1/me/player/recently-played',
+			{
+				headers: {
+					Authorization: `Bearer ${access_token}`
+				}
 			}
-		});
+		);
 		const json = await res.json();
 		if (res.status > 400) {
 			return {
@@ -68,7 +76,9 @@ export const load = (async ({ fetch }) => {
 		}
 		return {
 			album: json.items[0].track.album.name,
-			artist: json.items[0].track.artists.map((artist: { name: string }) => artist.name).join(', '),
+			artist: json.items[0].track.artists
+				.map((artist: { name: string }) => artist.name)
+				.join(', '),
 			track: json.items[0].track.name,
 			playing: false
 		};
@@ -104,4 +114,4 @@ export const load = (async ({ fetch }) => {
 		player: await getCurrentlyPlayingTrack(),
 		timeline: await getTimeline()
 	};
-}) satisfies PageLoad;
+}) satisfies PageServerLoad;

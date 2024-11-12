@@ -8,5 +8,3 @@
 
 <Projects />
 <Player player={data.player} />
-
-<style></style>
